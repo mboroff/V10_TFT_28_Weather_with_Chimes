@@ -18,9 +18,9 @@ void displayInsidetemp () {
     hp = h;
     int tf;
     tf = temperatureF;
-    texTx = 0;
-    texTy = iNy;
-    tft.setCursor(texTx,texTy);
+    x = 0;
+    y = iNy;
+    tft.setCursor(x,y);
     char printBuff[80];                      // display indore temp and humidity
     j = sprintf(printBuff, " In: %d", tf);
     strcat(printBuff, "F ");

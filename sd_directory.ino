@@ -24,14 +24,14 @@ void displayDirectory(){                  // display SD Directory
   tft.drawLine(160, 25, 205, 5, WHITE);
   tft.drawLine(205, 5, 240, 25, WHITE);
   tft.setTextColor(WHITE, BLUE);
-  texTx = 192;
-  texTy = 26;
-  tft.setCursor(texTx, texTy);
+  x = 192;
+  y = 26;
+  tft.setCursor(x, y);
   tft.print(F("Home"));
-  texTx = 80;
-  texTy = 30;
+  x = 80;
+  y = 30;
   tft.setTextColor(WHITE, BLUE);
-  tft.setCursor(texTx, texTy);
+  tft.setCursor(x, y);
   tft.print(F("SD Directory"));
   x = 40;
   y = 280;
@@ -39,10 +39,10 @@ void displayDirectory(){                  // display SD Directory
   height = 20;
   tft.fillRect(x-4, y-4, width+8, height+8, BLACK);
   tft.fillRect(x, y, width, height, WHITE);          //draw the   menu
-  texTx = 60;
-  texTy = 285;
+  x = 60;
+  y = 285;
   tft.setTextColor(BLACK, WHITE);
-  tft.setCursor(texTx, texTy);
+  tft.setCursor(x, y);
   tft.print(F("List more files"));
   tft.setTextColor(WHITE, BLUE);
   menuCtr = 1;
@@ -55,9 +55,9 @@ void displayDirectory(){                  // display SD Directory
      getTime();
      if (prevSec != mYsecond) {
          prevSec = mYsecond;       
-         texTx = 100;
-         texTy = 10;
-         tft.setCursor(texTx, texTy);
+         x = 100;
+         y = 10;
+         tft.setCursor(x, y);
          if (mYhour < 10 || (mYhour - 12) < 10){
              tft.print(F("0"));
              }
@@ -104,17 +104,17 @@ void fileLookup(){                // scan the directory of the SD
  // int height = 20; 
   drawHomered();    
   tft.setTextColor(BLACK, WHITE);
-  texTx = 60;
-  texTy = 285;
-  tft.setCursor(texTx, texTy);
+  x = 60;
+  y = 285;
+  tft.setCursor(x, y);
   tft.print(F("Reading Files      "));
   root = SD.open("/");
   printDirectory(root, 0);
  // tft.fillRect(x, y, width, height, BLUE);
   tft.setTextColor(BLACK, WHITE);
-  texTx = 60;
-  texTy = 285;
-  tft.setCursor(texTx, texTy);
+  x = 60;
+  y = 285;
+  tft.setCursor(x, y);
   if (fileSearch == String("MP3")){
     tft.print(F("List more songs"));
   }

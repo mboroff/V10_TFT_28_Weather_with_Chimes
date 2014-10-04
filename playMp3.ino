@@ -37,14 +37,14 @@ void playMp3(){                  // display SD Directory
   tft.drawLine(160, 25, 205, 5, WHITE);
   tft.drawLine(205, 5, 240, 25, WHITE);
   tft.setTextColor(WHITE, BLUE);
-  texTx = 192;
-  texTy = 26;
-  tft.setCursor(texTx, texTy);
+  x = 192;
+  y = 26;
+  tft.setCursor(x, y);
   tft.print(F("Home"));
-  texTx = 80;
-  texTy = 30;
+  x = 80;
+  y = 30;
   tft.setTextColor(WHITE, BLUE);
-  tft.setCursor(texTx, texTy);
+  tft.setCursor(x, y);
   tft.print(F("Play MP3 Music"));
   x = 40;
   y = 280;
@@ -53,10 +53,10 @@ void playMp3(){                  // display SD Directory
 
   tft.fillRect(x-4, y-4, width+8, height+8, BLACK);
   tft.fillRect(x, y, width, height, WHITE);          //draw the   menu
-  texTx = 60;
-  texTy = 285;
+  x = 60;
+  y = 285;
   tft.setTextColor(BLACK, WHITE);
-  tft.setCursor(texTx, texTy);
+  tft.setCursor(x, y);
   tft.print(F("List more somgs"));
   tft.setTextColor(WHITE, BLUE);
   menuCtr = 1;
@@ -69,9 +69,9 @@ void playMp3(){                  // display SD Directory
      getTime();                    
      if (prevSec != mYsecond) {               // display the time
          prevSec = mYsecond;       
-         texTx = 100;
-         texTy = 10;
-         tft.setCursor(texTx, texTy);
+         x = 100;
+         y = 10;
+         tft.setCursor(x, y);
          if (mYhour < 10 || (mYhour - 12) < 10){
              tft.print(F("0"));
              }

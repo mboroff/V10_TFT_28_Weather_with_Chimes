@@ -8,9 +8,9 @@ void displayTempgraphs()
   while(1) {                             // pressure test aand timer loop will interrup for request to get weather upadte
      if (prevSec != mYsecond) {                  // display the time
          prevSec = mYsecond;       
-         texTx = 95;
-         texTy = 15;
-         tft.setCursor(texTx, texTy);
+         x = 95;
+         y = 15;
+         tft.setCursor(x, y);
          if (mYhour < 10 || (mYhour - 12) < 10){
              tft.print(F("0"));
              }

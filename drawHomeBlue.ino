@@ -6,9 +6,9 @@ void drawHomeBlue(){      // draw home button blue background ok to go to option
     int height = 18;
     tft.fillRect(x, y, width, height, BLUE);
     tft.setTextColor(WHITE, BLUE);
-  texTx = 192;
-  texTy = 26;
-  tft.setCursor(texTx, texTy);
+  x = 192;
+  y = 26;
+  tft.setCursor(x, y);
   tft.print(F("Home"));
 
 }

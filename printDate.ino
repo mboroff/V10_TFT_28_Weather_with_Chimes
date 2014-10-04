@@ -1,9 +1,9 @@
 void printDate(){
   //print the date EG   3/1/11 23:59:59
   getTime();
-  texTx = 105;
-  texTy = 20;
-  tft.setCursor(texTx, texTy);
+  x = 105;
+  y = 20;
+  tft.setCursor(x, y);
   int wrkHr;
   wrkHr = mYhour;
   if (mYhour < 12){
@@ -27,21 +27,22 @@ void printDate(){
    
   if (mYmonthDay != prevDay) {                                     // If the date has changed Erase the previous date display
       prevDay = mYmonthDay;                                       // and print the new date
-      texTx = 5;
-      texTy = dateDisplaYy;
-      tft.setCursor(texTx, texTy);
+      x = 5;
+      y = dateDisplaYy;
+      tft.setCursor(x, y);
       tft.print(pF(&monthStrs[timeExtract.mon]));
       tft.print(F(" "));
       if (mYmonthDay < 10) tft.print("0");
       tft.print(mYmonthDay);
       tft.print(F(", "));
       tft.print(mYyear);
-      texTx = 105;
-      tft.setCursor(texTx, texTy);
+      tft.print(" ");
+      x = 105;
+      tft.setCursor(x, y);
       tft.print(pF(&dayStrs[timeExtract.wday]));
       tft.print(F("    "));
-      texTx = 190;
-      tft.setCursor(texTx, texTy);
+      x = 190;
+      tft.setCursor(x, y);
       tft.print(F("Day "));
       tft.print(doy);
   }

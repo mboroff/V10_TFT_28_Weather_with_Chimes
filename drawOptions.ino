@@ -4,9 +4,9 @@ void drawOptions() {                 // Display options menu
        menuShell(0, 0);                 // draw the bottom button, no prev or next
        }
 
-  texTx = 70;                        // text for bottom button
-  texTy = 305;
-  tft.setCursor(texTx, texTy);
+  x = 70;                        // text for bottom button
+  y = 305;
+  tft.setCursor(x, y);
   tft.setTextColor(BLACK, WHITE);
   tft.print("Return to Clock");  
   int x = 40;                      // construct the menu

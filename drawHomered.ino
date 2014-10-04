@@ -6,9 +6,9 @@ void drawHomered(){               /// draw home button with wait
     int height = 18;
     tft.fillRect(x, y, width, height, RED);
     tft.setTextColor(WHITE, RED);
-    texTx = 192;
-    texTy = 26;
-    tft.setCursor(texTx, texTy);
+    x = 192;
+    y = 26;
+    tft.setCursor(x, y);
     tft.print(F("Wait"));
 
 }

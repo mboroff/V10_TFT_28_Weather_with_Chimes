@@ -134,8 +134,8 @@ int fileCtr = 0;  // number files on sd
 int mp3Ctr;       // number of mp3 files on sd
 int internetCtr = 0;  // enternet ccess count
 int x, y;
-int texTx = 5;
-int texTy = 120;
+//int texTx = 5;
+//int texTy = 120;
 unsigned long endTime;
 
 /********************************************************
