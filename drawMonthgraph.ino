@@ -1,4 +1,4 @@
- void drawMonthgraph(int xCorr2,int yCorr2){   // print a requested month at a certain x y coordinate
+void drawMonthgraph(int xCorr2,int yCorr2){   // print a requested month at a certain x y coordinate
    tft.fillScreen(BLUE);  
    int x = xCorr2;
    int y = yCorr2;

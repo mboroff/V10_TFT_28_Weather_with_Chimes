@@ -1,4 +1,4 @@
- void listFile(char *filename) {           // scans the montly file of collected temps into a 32 entry array save high low and humidity
+void listFile(char *filename) {           // scans the montly file of collected temps into a 32 entry array save high low and humidity
 //Serial.println("Listing ");
 //Serial.println(filename);
   pinMode(10, OUTPUT);
