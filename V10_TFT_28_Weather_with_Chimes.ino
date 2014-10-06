@@ -547,13 +547,13 @@ void loop(void)
             }else {
                    displayWeather(); 
                   }
-         prevDay = 99;
-         printDate();
          if (hour() == 0 || hour() == 4 ||              //  every four hours update the clock
              hour() == 8 || hour() == 12 ||
              hour() == 16 || hour() == 20 ) {
              getNtp();
              }
+         prevDay = 99;
+         printDate();
          }
       if (minute() == 10 || minute() == 20 || minute() == 30 ||  // every ten minutes get weather update
           minute() == 40 || minute() == 50) {

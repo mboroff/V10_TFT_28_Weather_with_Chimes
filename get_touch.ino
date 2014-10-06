@@ -39,13 +39,13 @@ pz = 0;
       if (pz > MINPRESSURE) {
           px = map(px, TS_MINX, TS_MAXX, 0, tft.width());
           py = map(py, TS_MINY, TS_MAXY, 0, tft.height());
-/* 
+ 
           Serial.print(F("->(")); 
           Serial.print(px); Serial.print(F(", ")); 
           Serial.print(py); Serial.print(F(", ")); 
           Serial.print(pz);
           Serial.println(F(")"));
-*/
+
           if (pz > tsz) {
              tsx = px;   // get max
              tsy = py;

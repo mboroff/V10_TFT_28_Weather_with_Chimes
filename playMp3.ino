@@ -123,8 +123,8 @@ void playMp3(){                  // display SD Directory
       }
       if (tsx > 23 && tsx <= 110 && tsy >68 && tsy < 110) {
           drawHomered();      
-//          Serial.println(F("Option 1 Selected"));
-//          Serial.println(fileName[0]);
+          Serial.println(F("Option 1 Selected"));
+          Serial.println(fileName[0]);
           drawPause();
           drawStop();
           if (fileName[0] != "") musicPlayer.startPlayingFile(fileName[0]);
@@ -132,8 +132,8 @@ void playMp3(){                  // display SD Directory
           }
       if (tsx > 23 && tsx <= 110 && tsy >114 && tsy < 140) {
           drawHomered();      
-//          Serial.println(F("Option 2 Selected"));
-//          Serial.println(fileName[1]);
+          Serial.println(F("Option 2 Selected"));
+          Serial.println(fileName[1]);
           drawPause();
           drawStop();
           if (fileName[1] != "") musicPlayer.startPlayingFile(fileName[1]);
@@ -141,8 +141,8 @@ void playMp3(){                  // display SD Directory
           }
       if (tsx > 23 && tsx <= 110 && tsy >148 && tsy < 190) {
           drawHomered();      
-//          Serial.println(F("Option 3 Selected"));
-//          Serial.println(fileName[2]);
+          Serial.println(F("Option 3 Selected"));
+          Serial.println(fileName[2]);
           drawPause();
           drawStop();
           if (fileName[2] != "") musicPlayer.startPlayingFile(fileName[2]);
@@ -150,8 +150,8 @@ void playMp3(){                  // display SD Directory
           }
       if (tsx > 23 && tsx <= 110 && tsy >197 && tsy < 226) {
           drawHomered();      
-//          Serial.println(F("Option 4 Selected"));
-//          Serial.println(fileName[3]);
+          Serial.println(F("Option 4 Selected"));
+          Serial.println(fileName[3]);
           drawPause();
           drawStop();
           if (fileName[3] != "") musicPlayer.startPlayingFile(fileName[3]);
@@ -160,8 +160,8 @@ void playMp3(){                  // display SD Directory
 
       if (tsx > 125 && tsx <= 210 && tsy >68 && tsy < 110) {
           drawHomered();      
-//          Serial.println(F("Option 5 Selected"));
-//          Serial.println(fileName[4]);
+          Serial.println(F("Option 5 Selected"));
+          Serial.println(fileName[4]);
           drawPause();
           drawStop();          
           if (fileName[4] != "") musicPlayer.startPlayingFile(fileName[4]);
@@ -169,8 +169,8 @@ void playMp3(){                  // display SD Directory
           }
       if (tsx > 125 && tsx <= 210 && tsy >114 && tsy < 140) {
           drawHomered();      
-//          Serial.println(F("Option 6 Selected"));
-//          Serial.println(fileName[5]);
+          Serial.println(F("Option 6 Selected"));
+          Serial.println(fileName[5]);
           drawPause();
           drawStop();          
           if (fileName[5] != "") musicPlayer.startPlayingFile(fileName[5]);
@@ -179,8 +179,8 @@ void playMp3(){                  // display SD Directory
 
       if (tsx > 125 && tsx <= 210 && tsy >148 && tsy < 190) {
           drawHomered();      
-//          Serial.println(F("Option 7 Selected"));
-//          Serial.println(fileName[6]);
+          Serial.println(F("Option 7 Selected"));
+          Serial.println(fileName[6]);
           drawPause();
           drawStop();
           if (fileName[6] != "") musicPlayer.startPlayingFile(fileName[6]);
@@ -188,8 +188,8 @@ void playMp3(){                  // display SD Directory
           }
       if (tsx > 125 && tsx <= 210 && tsy >197 && tsy < 226) {
           drawHomered();      
-//          Serial.println(F("Option 8 Selected"));
-//          Serial.println(fileName[7]);
+          Serial.println(F("Option 8 Selected"));
+          Serial.println(fileName[7]);
           drawPause();
           drawStop();          
           if (fileName[7] != "") musicPlayer.startPlayingFile(fileName[7]);

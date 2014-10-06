@@ -17,8 +17,11 @@ bool getWeb(void) {
  int weatherMinuteCtr = 0;
  
  internetCtr++;  
- tft.fillRect(0, 300, 240, 30, BLUE);
- tft.setCursor(60, 305);
+ tft.fillRect(0, 280, 240, 40, BLUE);
+ tft.setCursor(60, 285);
+ tft.print(F("Free RAM: ")); 
+ tft.print(getFreeRam(), DEC);
+ tft.setCursor(60, 295);
  tft.print(F("Getting Weather Info"));
  uint32_t startTime = millis();
  endTime = 0;
@@ -57,7 +60,7 @@ bool getWeb(void) {
   while (www.connected() && (millis() - lastRead < IDLE_TIMEOUT_MS)) {
     while (www.available()) {
       char c = www.read();
-//      Serial.print(c);
+      Serial.print(c);
       lastRead = millis();
       if (c == '"') {
           if (startQuote == false) {
@@ -355,7 +358,11 @@ bool getWeb(void) {
 
   writeWeather();
 
-  tft.fillRect(0, 300, 240, 20, BLUE);
+ tft.setCursor(60, 305);
+ tft.print(F("Free RAM: ")); 
+ tft.print(getFreeRam(), DEC);
+ delay(5000);
+  tft.fillRect(0, 280, 240, 40, BLUE);
   
   return true;
 //  Serial.println(F("-------------------------------------"));
