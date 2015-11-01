@@ -19,9 +19,9 @@ void playHourly(){                                         // time the play the 
  // musicPlayer.useInterrupt(VS1053_FILEPLAYER_PIN_INT);  // DREQ int
  
   digitalWrite(10, HIGH);                                 // Chimes are played 10 A.M. to 8 P.M.
-//#ifdef DEBUG
+#ifdef DEBUG
 //  Serial.println(F("Starting Music"));
-//#endif
+#endif
   if (hour() == 10) musicPlayer.playFullFile("houra.mp3");
   if (hour() == 11) {
       if (mYmonth == 7 && mYmonthDay == 31) {

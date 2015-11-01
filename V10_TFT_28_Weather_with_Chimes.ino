@@ -1,5 +1,3 @@
-#include <SPI.h>
-
 /*************************************************** 
   This code is based on an example for the 
   Adafruit CC3000 Wifi Breakout & Shield
@@ -14,13 +12,14 @@
   Written by Limor Fried & Kevin Townsend for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
  ****************************************************/
+//#define DEBUG 1 
  
-#include <Adafruit_CC3000.h>               // wi-fi card
-#include <ccspi.h>                         // spi for wi-fi card
-#include <SPI.h>                           // spi
+#include <Adafruit_CC3000.h>
+#include <ccspi.h>
+#include <SPI.h>
 #include <string.h>
-#include "utility/debug.h"                // utilities for wi-fi card
-#include "utility/sntp.h"
+#include "utility/debug.h"
+#include "sntp.h"
 #include <Time.h>                          // time
 #include <Adafruit_VS1053.h>              // MP3 card
 #include <SD.h>                           // disc for bmps and music
@@ -241,12 +240,11 @@ static int weatherBmps[19] = { 3, 3, 3, 3, 5, 8, 8,  11, 2, 2, 2, 6, 10, 10, 6, 
 //	4 - Local UTC offset in minutes for Daylight Savings Time (US Eastern DST is UTC - 4:00
 //	5 - Enable Daylight Savings Time adjustment (not implemented yet)
 //
-sntp mysntp = sntp(NULL, "0.north-america.pool.ntp.org", (short)(-6 * 60), (short)(-5 * 60), true);
-//sntp mysntp = sntp(NULL, "time.nist.gov", (short)(-6 * 60), (short)(-5 * 60), true);
+sntp mysntp = sntp(NULL, "time.nist.gov", (short)(-6 * 60), (short)(-6 * 60), true);
 
 // Type SNTP_Timestamp is 64-bit NTP time. High-order 32-bits is seconds since 1/1/1900
 //   Low order 32-bits is fractional seconds
-SNTP_Timestamp_t nnow;
+SNTP_Timestamp_t now2;
 
 // Type NetTime_t contains NTP time broken out to human-oriented values:
 //	uint16_t millis; ///< Milliseconds after the second (0..999)
@@ -263,20 +261,18 @@ NetTime_t timeExtract;
 
 #define pF(string_pointer) (reinterpret_cast<const __FlashStringHelper *>(pgm_read_word(string_pointer)))
 
-const prog_char   janStr[] PROGMEM = "Jan.";
-const prog_char   febStr[] PROGMEM = "Feb.";
+const prog_char   janStr[] PROGMEM = "January";
+const prog_char   febStr[] PROGMEM = "February";
 const prog_char   marStr[] PROGMEM = "March";
 const prog_char   aprStr[] PROGMEM = "April";
 const prog_char   mayStr[] PROGMEM = "May";
 const prog_char   junStr[] PROGMEM = "June";
 const prog_char   julStr[] PROGMEM = "July";
-const prog_char   augStr[] PROGMEM = "Aug.";
-const prog_char   sepStr[] PROGMEM = "Sept.";
-const prog_char   octStr[] PROGMEM = "Oct.";
-const prog_char   novStr[] PROGMEM = "Nov.";
-const prog_char   decStr[] PROGMEM = "Dec."; 
-//   {"Dec.", "Jan.", "Feb.", "March", "April", "May", "June", 
-//    "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."};
+const prog_char   augStr[] PROGMEM = "August";
+const prog_char   sepStr[] PROGMEM = "September";
+const prog_char   octStr[] PROGMEM = "October";
+const prog_char   novStr[] PROGMEM = "November";
+const prog_char   decStr[] PROGMEM = "December"; 
 
 PROGMEM const char* const monthStrs[] = { janStr, febStr, marStr, aprStr, mayStr, junStr,
                                           julStr, augStr, sepStr, octStr, novStr, decStr}; 
@@ -291,6 +287,7 @@ const prog_char   satStr[] PROGMEM = "Saturday";
 
 PROGMEM const char* const dayStrs[] = { sunStr, monStr, tueStr,  wedStr,
                                         thuStr, friStr, satStr};
+
 
 /*****************************************************************************
              clock stuff
@@ -354,15 +351,24 @@ void setup(void)
   tft.reset();                 // reset the tft display copied from Adafruit examples
   uint16_t identifier = tft.readID();
   if(identifier == 0x9325) {
+#ifdef DEBUG    
     Serial.println(F("Found ILI9325 LCD driver"));
+#endif    
     } 
   else if(identifier == 0x9328) {
+#ifdef DEBUG    
     Serial.println(F("Found ILI9328 LCD driver"));
+#endif    
   } else if(identifier == 0x7575) {
+#ifdef DEBUG    
     Serial.println(F("Found HX8347G LCD driver"));
+#endif    
   } else if(identifier == 0x9341) {
+#ifdef DEBUG    
     Serial.println(F("Found ILI9341 LCD driver"));
+#endif    
   } else {
+#ifdef DEBUG    
      Serial.print(F("Unknown LCD driver chip: "));
      Serial.println(identifier, HEX);
      Serial.println(F("If using the Adafruit 2.8\" TFT Arduino shield, the line:"));
@@ -371,6 +377,7 @@ void setup(void)
      Serial.println(F("If using the breakout board, it should NOT be #defined!"));
      Serial.println(F("Also if using the breakout, double-check that all wiring"));
      Serial.println(F("matches the tutorial."));
+#endif     
      return;
      }
 
@@ -386,8 +393,10 @@ void setup(void)
   tft.print(F("Hello World!"));
   x = 10;
   y = 20;
+#ifdef DEBUG
   Serial.print("Screen "); Serial.print(tft.width());          // display the screen dimensions
   Serial.print(" X "); Serial.println(tft.height());
+#endif
  tft.setCursor(x, y);
  tft.print("Screen Size "); 
  y = y + 20;   //40
@@ -398,14 +407,17 @@ void setup(void)
  y = y + 20;  //60
  
  if (! touch.begin()) {                                         // start the ts controller
+ #ifdef DEBUG
     Serial.println("STMPE not found!");
+#endif
     while(1);
   }
 
  tft.setCursor(x , y);
  tft.print(F("TS started"));
+#ifdef DEBUG
   Serial.println(F("Touchscreen started"));
-
+#endif
   y = y + 20; // 80                                            display free memory
   tft.setCursor(x, y);
   tft.print(F("Free RAM: ")); 
@@ -414,16 +426,22 @@ void setup(void)
   y = y + 20;  // 100
   tft.setCursor(x , y);
   tft.print(F("Start MP3"));                                 // start the MP3 card
+ #ifdef DEBUG
   Serial.println("Adafruit VS1053 Simple Test");
-
+#endif
   musicPlayer.begin(); // initialise the music player
-  Serial.print(F("Initializing SD card..."));
+#ifdef DEBUG
+ Serial.print(F("Initializing SD card..."));
+#endif
    if (!SD.begin(CARDCS)) {                       // using vs1053 sd card
+ #ifdef DEBUG
        Serial.println("initialization failed!");
+#endif       
        return;
        }
+ #ifdef DEBUG       
    Serial.println("initialization done.");
-  
+#endif  
   // Set volume for left, right channels. lower numbers == louder volume!
   musicPlayer.setVolume(20,20);
 
@@ -442,27 +460,33 @@ void setup(void)
 // mYhour = 13;
 // playHourly();
 
-  Serial.println(F("Hello, CC3000!\n"));                               // start wi-fi card
-  Serial.print(F("Free RAM: ")); Serial.println(getFreeRam(), DEC); 
+//  Serial.println(F("Hello, CC3000!\n"));                               // start wi-fi card
+//  Serial.print(F("Free RAM: ")); Serial.println(getFreeRam(), DEC); 
   //* Initialise the module 
-  Serial.println(F("\nInitializing..."));
+//  Serial.println(F("\nInitializing..."));
+ 
   y = y + 20; //120
   tft.setCursor(x, y);
   tft.print(F("Begin CC3000"));
 
   if (!cc3000.begin())
   {
+#ifdef DEBUG    
     Serial.println(F("Couldn't begin()! Check your wiring?"));
+#endif    
     while(1);
   }
   
   if (!cc3000.begin())
   {
+ #ifdef DEBUG    
     Serial.println(F("Couldn't begin()! Check your wiring?"));
+#endif    
     while(1);
   }
-  
+#ifdef DEBUG  
   Serial.print(F("\nAttempting to connect to ")); Serial.println(WLAN_SSID);
+#endif  
   y = y + 20; // 140
   tft.setCursor(x, y);
   tft.print(F("Connecting to")); 
@@ -471,11 +495,14 @@ void setup(void)
   tft.print(WLAN_SSID); 
   
   if (!cc3000.connectToAP(WLAN_SSID, WLAN_PASS, WLAN_SECURITY)) {
+ #ifdef DEBUG    
     Serial.println(F("Failed!"));
+#endif    
     while(1);
   }
-   
+ #ifdef DEBUG   
   Serial.println(F("Connected!"));
+#endif  
   y = y +20;  //180
   tft.setCursor(x, y);
   tft.print(F("Connected"));  
@@ -483,7 +510,9 @@ void setup(void)
   tft.setCursor(x, y);
   tft.print(F("Requesting DHCP")); 
   //* Wait for DHCP to complete 
+ #ifdef DEBUG  
   Serial.println(F("Request DHCP"));
+#endif  
   while (!cc3000.checkDHCP())
   {
     delay(100); // ToDo: Insert a DHCP timeout!
@@ -492,20 +521,26 @@ void setup(void)
   ip = 0;
    while (ip == 0) {
   // Try looking up the website's IP address
+#ifdef DEBUG 
   Serial.print(WEBSITE); Serial.print(F(" -> "));
+#endif  
  
     if (! cc3000.getHostByName(WEBSITE, &ip)) {
+#ifdef DEBUG      
         Serial.println(F("Couldn't resolve!"));
+#endif        
         cc3000.stop();
+#ifdef DEBUG        
         Serial.println("RESET!");
         Serial.flush();
+#endif        
         void(* resetFunc) (void) = 0; //declare reset function @ address 0
         resetFunc();  //call reset
     }
     delay(500);
   }
 
-  cc3000.printIPdotsRev(ip);
+ // cc3000.printIPdotsRev(ip);
   
   tft.fillScreen(BLUE);                                           // start drawing the clock face and initial get time and weather
   tft.setTextSize(texTsize);
@@ -535,7 +570,17 @@ void loop(void)
         displayWeather();
         prevDay = 99;
         }
-  
+     if (hour() == 0 && minute() == 0 && second() == 0) {
+#ifdef DEBUG       
+        Serial.println("RESET!");
+        Serial.flush();
+#endif        
+        void(* resetFunc) (void) = 0; //declare reset function @ address 0
+        resetFunc();  //call reset
+        }       
+     if (minute() == 55 && second() < 2) {          //  on the hour play westminester chimes
+         getNtp();
+     }
      if (minute() == 0 && second() < 2) {          //  on the hour play westminester chimes
          playHourly();
          donotPlay = true;
@@ -544,14 +589,15 @@ void loop(void)
             tft.setCursor(60, 305);
             tft.print(F("Connection failed"));
             delay(10000);
+#ifdef DEBUG            
+            Serial.println("RESET!");
+            Serial.flush();
+#endif            
+            void(* resetFunc) (void) = 0; //declare reset function @ address 0
+            resetFunc();  //call reset
             }else {
                    displayWeather(); 
                   }
-         if (hour() == 0 || hour() == 4 ||              //  every four hours update the clock
-             hour() == 8 || hour() == 12 ||
-             hour() == 16 || hour() == 20 ) {
-             getNtp();
-             }
          prevDay = 99;
          printDate();
          }
@@ -564,6 +610,12 @@ void loop(void)
                   tft.setCursor(60, 305);
                   tft.print(F("Connection failed"));
                   delay(10000);
+#ifdef DEBUG                  
+                  Serial.println("RESET!");
+                  Serial.flush();
+#endif            
+                  void(* resetFunc) (void) = 0; //declare reset function @ address 0
+                  resetFunc();  //call reset
                   }else {
                          displayWeather(); 
                          }

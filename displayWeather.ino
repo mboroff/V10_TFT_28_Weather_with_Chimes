@@ -61,7 +61,7 @@ void displayWeather()                          // display the weather informatio
     tft.print(fahrenheit[7]); 
     tft.print(F("F "));
     tft.print(conditions4);         //   2 Days after tomorrow
-    Serial.print("Web accesses ");   Serial.println(internetCtr); 
+ //   Serial.print("Web accesses ");   Serial.println(internetCtr); 
 
     for (int i = 0; i < 20; i++) {          // based upon weather description display bmp
          int result = strcmp(weather, weatherChars[i]); // compare the value of weather charaters to find bmp file

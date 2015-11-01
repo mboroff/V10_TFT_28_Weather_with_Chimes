@@ -44,12 +44,6 @@ bool getWeb(void) {
                            Serial.println(F("Connection failed"));  
                            Serial.flush();
                            return false;
-//                          www.close();
-//                          cc3000.stop();
-//                          Serial.println("RESET!");
-//                          Serial.flush();
-//                          void(* resetFunc) (void) = 0; //declare reset function @ address 0
-//                          resetFunc();  //call reset
                           }
 //  Serial.println();
 //  Serial.println(F("-------------------------------------"));
@@ -60,7 +54,7 @@ bool getWeb(void) {
   while (www.connected() && (millis() - lastRead < IDLE_TIMEOUT_MS)) {
     while (www.available()) {
       char c = www.read();
-      Serial.print(c);
+//      Serial.print(c);
       lastRead = millis();
       if (c == '"') {
           if (startQuote == false) {
@@ -351,16 +345,18 @@ bool getWeb(void) {
 //  Serial.println();
 
   www.close();
-
+#ifdef DEBUG
   Serial.print("Weather retrieved in ");
   Serial.print(endTime);   
   Serial.println(" milliseconds");
-
+#endif
   writeWeather();
 
  tft.setCursor(60, 305);
  tft.print(F("Free RAM: ")); 
  tft.print(getFreeRam(), DEC);
+ tft.print(" ");
+ tft.print(internetCtr);
  delay(5000);
   tft.fillRect(0, 280, 240, 40, BLUE);
   
@@ -374,3 +370,4 @@ bool getWeb(void) {
 
  //displayWeather();
 }
+
